@@ -1,10 +1,7 @@
 package com.kiran.Hotel.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
 
@@ -14,6 +11,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Setter
 @Getter
+@Data
 public class BookedRoom {
 
 
@@ -42,12 +40,15 @@ public class BookedRoom {
     @Column(name = "total_Guest")
     private int totalNumofGuests;
 
+    @Setter
     @Column(name = "confirmation_Number")
     private String bookingConfirmationNumber;
 
+    @Setter
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="room_id")
     private Room room;
+
 
 
 
@@ -65,12 +66,5 @@ public class BookedRoom {
         calcTotalGuest();
     }
 
-    public void setBookingConfirmationNumber(String bookingConfirmationNumber) {
-        this.bookingConfirmationNumber = bookingConfirmationNumber;
-    }
 
-
-    public void setRoom(Room room) {
-        this.room = room;
-    }
 }
