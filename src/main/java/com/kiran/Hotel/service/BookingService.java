@@ -29,7 +29,8 @@ public class BookingService implements IBookingService{
 
     @Override
     public BookedRoom findByBookingConfirmationCode(String confirmationCode) {
-        return null;
+
+        return bookingRepo.findByBookingConfirmationCode(confirmationCode);
     }
 
     @Override
@@ -41,11 +42,35 @@ public class BookingService implements IBookingService{
         Room room = roomService.getRoomById(roomId).get();
         List<BookedRoom> existingBookings = room.getBookings();
         boolean roomIsAvailable = roomIsAvailable(bookingRequest,existingBookings);
-        
-        return "";
+        if(roomIsAvailable){
+            room.addBooking(bookingRequest);
+            bookingRepo.save(bookingRequest);
+        }else{
+            throw new InvalidBookingRequestException("Sorry, This room is not available for the selected dates;");
+        }
+        return bookingRequest.getBookingConfirmationCode();
     }
 
     private boolean roomIsAvailable(BookedRoom bookingRequest, List<BookedRoom> existingBookings) {
+        return existingBookings.stream()
+                .noneMatch(existingBooking ->
+                        bookingRequest.getCheckInDate().equals(existingBooking.getCheckInDate())
+                            || bookingRequest.getCheckoutDate().isBefore(existingBooking.getCheckoutDate())
+                            || (bookingRequest.getCheckInDate().isAfter(existingBooking.getCheckInDate())
+                        && bookingRequest.getCheckInDate().isBefore(existingBooking.getCheckoutDate()))
+                        || (bookingRequest.getCheckInDate().isBefore(existingBooking.getCheckInDate())
+
+                         && bookingRequest.getCheckoutDate().equals(existingBooking.getCheckoutDate()))
+                        || (bookingRequest.getCheckInDate().isBefore(existingBooking.getCheckInDate())
+
+                         && bookingRequest.getCheckoutDate().isAfter(existingBooking.getCheckoutDate()))
+
+                        || (bookingRequest.getCheckInDate().equals(existingBooking.getCheckoutDate())
+                        && bookingRequest.getCheckoutDate().equals(existingBooking.getCheckInDate()))
+
+                        || (bookingRequest.getCheckInDate().equals(existingBooking.getCheckoutDate())
+                        && bookingRequest.getCheckoutDate().equals(bookingRequest.getCheckInDate()))
+                );
     }
 
     @Override

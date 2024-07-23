@@ -41,8 +41,8 @@ public class BookedRoom {
     private int totalNumofGuests;
 
     @Setter
-    @Column(name = "confirmation_Number")
-    private String bookingConfirmationNumber;
+    @Column(name = "confirmation_code")
+    private String bookingConfirmationCode;
 
     @Setter
     @ManyToOne(fetch = FetchType.LAZY)

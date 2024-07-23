@@ -35,15 +35,15 @@ public class BookingResponse {
     private int totalNumofGuests;
 
 
-    private String bookingConfirmationNumber;
+    private String bookingConfirmationCode;
 
 
     private RoomResponse room;
 
-    public BookingResponse(String bookingConfirmationNumber, LocalDate checkInDate,
+    public BookingResponse(String bookingConfirmationCode, LocalDate checkInDate,
                            LocalDate checkoutDate,
                            Long bookingId) {
-        this.bookingConfirmationNumber = bookingConfirmationNumber;
+        this.bookingConfirmationCode = bookingConfirmationCode;
         this.checkInDate = checkInDate;
         this.checkoutDate = checkoutDate;
         this.bookingId = bookingId;
@@ -113,12 +113,12 @@ public class BookingResponse {
         this.totalNumofGuests = totalNumofGuests;
     }
 
-    public String getBookingConfirmationNumber() {
-        return bookingConfirmationNumber;
+    public String getBookingConfirmationCode() {
+        return bookingConfirmationCode;
     }
 
-    public void setBookingConfirmationNumber(String bookingConfirmationNumber) {
-        this.bookingConfirmationNumber = bookingConfirmationNumber;
+    public void setBookingConfirmationCode(String bookingConfirmationCode) {
+        this.bookingConfirmationCode = bookingConfirmationCode;
     }
 
     public RoomResponse getRoom() {

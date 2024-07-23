@@ -43,7 +43,7 @@ public class BookingController {
         return new BookingResponse(booking.getBookingId(), booking.getCheckInDate(),
                 booking.getCheckoutDate(), booking.getGuestFullName(),booking.getGuestEmail(),
                 booking.getNumOfAdults(), booking.getNumOfChildren(),
-                booking.getTotalNumofGuests(),booking.getBookingConfirmationNumber(), room
+                booking.getTotalNumofGuests(),booking.getBookingConfirmationCode(), room
         );
 
 
