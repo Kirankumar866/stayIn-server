@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@CrossOrigin
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/bookings")
@@ -61,11 +62,13 @@ public class BookingController {
         }
     }
 
-    @PostMapping("/room/${roomId}/booking")
-    public ResponseEntity<?> saveBooking(@PathVariable Long roomId,
+    @PostMapping("/room/{roomId}/booking")
+    public ResponseEntity<?> saveBooking(@PathVariable("roomId") Long roomId,
                                          @RequestBody BookedRoom bookingRequest){
+        System.out.println("b" + bookingRequest);
         try{
             String confirmationCode = bookingService.saveBooking(roomId,bookingRequest);
+            System.out.println("confirmation" + confirmationCode);
             return ResponseEntity.ok("Room booked successfully! Your Booking confirmation code is :"+ confirmationCode);
         }catch(InvalidBookingRequestException e){
             return ResponseEntity.badRequest().body(e.getMessage());

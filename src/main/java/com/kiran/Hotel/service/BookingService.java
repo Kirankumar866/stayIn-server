@@ -35,6 +35,7 @@ public class BookingService implements IBookingService{
 
     @Override
     public String saveBooking(Long roomId, BookedRoom bookingRequest) {
+        System.out.println(bookingRequest);
         if(bookingRequest.getCheckoutDate().isBefore(bookingRequest.getCheckInDate())){
             throw new InvalidBookingRequestException("Check-In date must come before check-Out date");
 

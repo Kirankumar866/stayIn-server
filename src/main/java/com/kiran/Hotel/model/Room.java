@@ -13,6 +13,7 @@ import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.hibernate.annotations.BatchSize;
 
 @Entity
 @Getter
@@ -32,6 +33,7 @@ public class Room {
     private Blob photo;
 
     @OneToMany(mappedBy = "room", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @BatchSize(size=10)
     private List<BookedRoom> bookings;
 
     public Room() {
