@@ -42,7 +42,7 @@ public class BookingController {
         RoomResponse room = new RoomResponse(theRoom.getId(), theRoom.getRoomType(), theRoom.getRoomPrice());
 
         return new BookingResponse(booking.getBookingId(), booking.getCheckInDate(),
-                booking.getCheckoutDate(), booking.getGuestFullName(),booking.getGuestEmail(),
+                booking.getCheckOutDate(), booking.getGuestFullName(),booking.getGuestEmail(),
                 booking.getNumOfAdults(), booking.getNumOfChildren(),
                 booking.getTotalNumofGuests(),booking.getBookingConfirmationCode(), room
         );
@@ -65,7 +65,6 @@ public class BookingController {
     @PostMapping("/room/{roomId}/booking")
     public ResponseEntity<?> saveBooking(@PathVariable("roomId") Long roomId,
                                          @RequestBody BookedRoom bookingRequest){
-        System.out.println("b" + bookingRequest);
         try{
             String confirmationCode = bookingService.saveBooking(roomId,bookingRequest);
             System.out.println("confirmation" + confirmationCode);
@@ -77,7 +76,8 @@ public class BookingController {
     }
 
     @DeleteMapping("/booking/{bookingId}/delete")
-    public void cancelBooking(Long bookingId){
+    public void cancelBooking(@PathVariable Long bookingId){
+        System.out.println(bookingId);
         bookingService.cancelBooking(bookingId);
     }
 }
