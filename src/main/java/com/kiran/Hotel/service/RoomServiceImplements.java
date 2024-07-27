@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.sql.Blob;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -93,6 +94,11 @@ public class RoomServiceImplements implements IRoomService{
     @Override
     public Optional<Room> getRoomById(Long roomId) {
         return Optional.of(roomRepo.findById(roomId).get());
+    }
+
+    @Override
+    public List<Room> getAvailableRooms(LocalDate checkInDate, LocalDate checkOutDate, String roomType) {
+        return roomRepo.findAvailableRoomsByDatesAndType(checkInDate,checkOutDate,roomType);
     }
 
 

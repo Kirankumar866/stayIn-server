@@ -1,14 +1,14 @@
 package com.kiran.Hotel.response;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDate;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Setter
+@Getter
 public class BookingResponse {
 
     private Long bookingId;
@@ -17,7 +17,7 @@ public class BookingResponse {
     private LocalDate checkInDate;
 
 
-    private LocalDate checkoutDate;
+    private LocalDate checkOutDate;
 
 
     private String guestFullName;
@@ -41,11 +41,11 @@ public class BookingResponse {
     private RoomResponse room;
 
     public BookingResponse(String bookingConfirmationCode, LocalDate checkInDate,
-                           LocalDate checkoutDate,
+                           LocalDate checkOutDate,
                            Long bookingId) {
         this.bookingConfirmationCode = bookingConfirmationCode;
         this.checkInDate = checkInDate;
-        this.checkoutDate = checkoutDate;
+        this.checkOutDate = checkOutDate;
         this.bookingId = bookingId;
     }
 
@@ -65,12 +65,12 @@ public class BookingResponse {
         this.checkInDate = checkInDate;
     }
 
-    public LocalDate getCheckoutDate() {
-        return checkoutDate;
+    public LocalDate getCheckOutDate() {
+        return checkOutDate;
     }
 
     public void setCheckoutDate(LocalDate checkoutDate) {
-        this.checkoutDate = checkoutDate;
+        this.checkOutDate = checkOutDate;
     }
 
     public String getGuestFullName() {
