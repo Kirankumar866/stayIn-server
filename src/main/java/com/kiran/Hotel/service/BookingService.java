@@ -42,6 +42,7 @@ public class BookingService implements IBookingService{
             throw new InvalidBookingRequestException("Check-In date must come before check-Out date");
 
         }
+
         Room room = roomService.getRoomById(roomId).get();
         List<BookedRoom> existingBookings = room.getBookings();
         boolean roomIsAvailable = roomIsAvailable(bookingRequest,existingBookings);

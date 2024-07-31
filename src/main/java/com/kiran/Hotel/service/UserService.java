@@ -1,11 +1,16 @@
 package com.kiran.Hotel.service;
-import org.springframework.validation.Validator;
 import com.kiran.Hotel.exception.UserAlreadyExistsException;
+import com.kiran.Hotel.model.Role;
 import com.kiran.Hotel.model.User;
+import com.kiran.Hotel.repository.RoleRepository;
 import com.kiran.Hotel.repository.UserRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -13,29 +18,41 @@ import java.util.List;
 public class UserService implements IUserService{
 
     private final UserRepository userRepo;
-    private final PasswordEnCoder pass;
+    private final PasswordEncoder passwordEncoder;
+    private final RoleRepository roleRepo;
+
 
     @Override
     public User registerUser(User user) {
-        if(userRepo.existByEmail(user.getEmail())){
+        if(userRepo.existsByEmail(user.getEmail())){
             throw new UserAlreadyExistsException(user.getEmail() + " already exists");
         }
-        return null;
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        Role userRole = roleRepo.findByName("ROLE_USER").get();
+        user.setRoles(Collections.singletonList(userRole));
+        return userRepo.save(user);
     }
 
     @Override
     public List<User> getUsers() {
-        return List.of();
+        return userRepo.findAll();
     }
 
+    @Transactional
     @Override
     public void deleteUser(String email) {
+
+        User theUser = getUser(email);
+        if(theUser != null){
+            userRepo.deleteByEmail(email);
+        }
+
 
     }
 
     @Override
     public User getUser(String email) {
-        return null;
+        return userRepo.findByEmail(email).orElseThrow(()-> new UsernameNotFoundException("User not found!"));
     }
 }
 

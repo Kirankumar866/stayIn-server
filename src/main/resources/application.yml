@@ -19,6 +19,18 @@ spring :
     file-size-threshold: 2KB
 
 
+    security:
+      jwt:
+        secret-key: 5678901234567890
+        expire-length: 3600000
+
+
+
+
+
+
+
+
 
 
 

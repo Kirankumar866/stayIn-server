@@ -3,6 +3,7 @@ package com.kiran.Hotel.model;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 import java.util.Collection;
@@ -24,6 +25,10 @@ public class Role {
 
     @ManyToMany(mappedBy = "roles")
     private Collection<User> users = new HashSet<>();
+
+    public Role(String name) {
+        this.name = name;
+    }
 
     public void assignRoleToUser(User user){
         user.getRoles().add(this);
