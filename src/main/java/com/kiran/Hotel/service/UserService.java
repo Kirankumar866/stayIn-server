@@ -24,8 +24,16 @@ public class UserService implements IUserService{
 
     @Override
     public User registerUser(User user) {
+        System.out.println("user" + user);
+
+        if (user.getEmail() == null) {
+            throw new IllegalArgumentException("Email cannot be null" + user.getEmail());
+        }
         if(userRepo.existsByEmail(user.getEmail())){
             throw new UserAlreadyExistsException(user.getEmail() + " already exists");
+        }
+        if (user.getPassword() == null) {
+            throw new IllegalArgumentException("Password cannot be null" + user.getPassword());
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         Role userRole = roleRepo.findByName("ROLE_USER").get();
@@ -46,8 +54,6 @@ public class UserService implements IUserService{
         if(theUser != null){
             userRepo.deleteByEmail(email);
         }
-
-
     }
 
     @Override

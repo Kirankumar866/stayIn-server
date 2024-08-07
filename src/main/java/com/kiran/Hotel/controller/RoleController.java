@@ -15,6 +15,7 @@ import java.util.List;
 import static org.springframework.http.HttpStatus.FOUND;
 
 @RestController
+@CrossOrigin
 @RequiredArgsConstructor
 @RequestMapping("/api/roles")
 public class RoleController {

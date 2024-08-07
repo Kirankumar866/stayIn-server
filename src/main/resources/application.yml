@@ -1,7 +1,4 @@
-
-
-
-spring :
+spring:
   datasource:
     username: root
     password: My!phon3
@@ -14,25 +11,12 @@ spring :
       format_sql: true
   servlet:
     multipart:
-    max-file-size: 5MB
-    max-request-size: 5MB
-    file-size-threshold: 2KB
+      max-file-size: 5MB
+      max-request-size: 5MB
+      file-size-threshold: 2KB
 
-
-    security:
-      jwt:
-        secret-key: 5678901234567890
-        expire-length: 3600000
-
-
-
-
-
-
-
-
-
-
-
-
+security:
+  jwt:
+    jwtSecret: 567890123456789436576799420245049972002781236790123
+    expirationInMils: 3600000
 

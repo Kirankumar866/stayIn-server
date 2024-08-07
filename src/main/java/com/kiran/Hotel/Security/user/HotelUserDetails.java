@@ -1,6 +1,7 @@
 package com.kiran.Hotel.Security.user;
 
 import com.kiran.Hotel.model.User;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,18 +14,15 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static java.util.Arrays.stream;
 
-@AllArgsConstructor
 @Getter
 @Setter
+@AllArgsConstructor
 @NoArgsConstructor
 public class HotelUserDetails implements UserDetails {
     private Long id;
-    private String email;
-
+    private  String email;
     private String password;
-
     private Collection<GrantedAuthority> authorities;
 
     public static HotelUserDetails buildUserDetails(User user){
@@ -32,10 +30,15 @@ public class HotelUserDetails implements UserDetails {
                 .stream()
                 .map(role -> new SimpleGrantedAuthority(role.getName()))
                 .collect(Collectors.toList());
-
-        return new HotelUserDetails(user.getId(),user.getEmail(),user.getPassword(),authorities);
+        return new HotelUserDetails(
+                user.getId(),
+                user.getEmail(),
+                user.getPassword(),
+                authorities);
 
     }
+
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
