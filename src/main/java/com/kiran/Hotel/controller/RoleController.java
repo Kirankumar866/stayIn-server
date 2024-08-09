@@ -15,7 +15,7 @@ import java.util.List;
 import static org.springframework.http.HttpStatus.FOUND;
 
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "http://127.0.0.1:5173")
 @RequiredArgsConstructor
 @RequestMapping("/api/roles")
 public class RoleController {

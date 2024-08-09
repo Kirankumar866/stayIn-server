@@ -1,28 +1,26 @@
 package com.kiran.Hotel.model;
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 
+
+@Entity
 @Getter
 @Setter
-@Entity
 @NoArgsConstructor
-
 public class Role {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String name;
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "roles")
     private Collection<User> users = new HashSet<>();
 
@@ -42,17 +40,12 @@ public class Role {
     }
 
     public void removeAllUsersFromRole(){
-        if(this.getUsers() != null){
+        if (this.getUsers() != null){
             List<User> roleUsers = this.getUsers().stream().toList();
-            roleUsers.forEach(this::removeUserFromRole);
+            roleUsers.forEach(this :: removeUserFromRole);
         }
     }
-
-    public String getName(){
-        return name != null ? name : "";
+    public  String getName(){
+        return name != null? name : "";
     }
-
-
-
-
 }

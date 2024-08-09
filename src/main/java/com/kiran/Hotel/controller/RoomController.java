@@ -34,7 +34,7 @@ import static java.util.stream.Collectors.toList;
 
 @RestController
 @RequiredArgsConstructor
-@CrossOrigin
+@CrossOrigin(origins = "http://127.0.0.1:5173")
 @RequestMapping("/rooms")
 public class RoomController {
 

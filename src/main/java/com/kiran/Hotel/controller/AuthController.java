@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "http://127.0.0.1:5173")
 @RequestMapping("/auth")
 @RequiredArgsConstructor
 public class AuthController {
@@ -40,7 +40,6 @@ public class AuthController {
     @PostMapping("/register-user")
     public ResponseEntity<?> registerUser(@RequestBody User user){
 
-        System.out.println("USER DETAILS"+ user.getEmail() + user.getPassword());
 
         try{
             userService.registerUser(user);
