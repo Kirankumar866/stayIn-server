@@ -52,6 +52,7 @@ public class BookingService implements IBookingService{
         }else{
             throw new InvalidBookingRequestException("Sorry, This room is not available for the selected dates;");
         }
+        System.out.println(bookingRequest.getBookingConfirmationCode());
         return bookingRequest.getBookingConfirmationCode();
     }
 
@@ -81,5 +82,10 @@ public class BookingService implements IBookingService{
     public void cancelBooking(Long bookingId) {
         bookingRepo.deleteById(bookingId);
 
+    }
+
+    @Override
+    public List<BookedRoom> getBookingsByUserEmail(String email) {
+        return bookingRepo.findByGuestEmail(email);
     }
 }
