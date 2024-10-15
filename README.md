@@ -1,6 +1,4 @@
-Here’s a basic `README.md` file for the **Hotel Reservation System** project:
 
----
 
 # Hotel Reservation System
 
